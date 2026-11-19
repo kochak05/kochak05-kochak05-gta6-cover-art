@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA-style cover art maker</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>VICE <span>COVER</span> STUDIO</h1>
+  <p class="tagline">Turn your photo into poster-style cover art. Everything runs offline, in your browser.</p>
+</header>
+
+<main class="workbench">
+  <section class="panel controls" aria-label="Editor controls">
+    <h2>1 · Photos</h2>
+    <label class="upload" for="photoInput">+ Add photos from your machine</label>
+    <input id="photoInput" type="file" accept="image/*" multiple hidden>
+    <div class="tray" id="photoTray" aria-label="Your photos"></div>
+    <p class="hint">Click a photo, then click a panel in the preview to put it there. Drag a panel to move its photo, use the zoom slider to crop it.</p>
+    <div class="field">
+      <label for="zoomRange">Zoom of selected panel</label>
+      <input id="zoomRange" type="range" min="1" max="2.5" step="0.01" value="1">
+    </div>
+    <button id="fitButton" type="button" class="ghost">Reset pan &amp; zoom</button>
+
+    <h2>2 · Layout</h2>
+    <div class="choices" id="layoutChoices">
+      <button type="button" data-layout="split" class="choice active" aria-pressed="true">
+        <span class="mini mini-split"></span>Hero split
+      </button>
+      <button type="button" data-layout="grid" class="choice" aria-pressed="false">
+        <span class="mini mini-grid"></span>Four panels
+      </button>
+      <button type="button" data-layout="strip" class="choice" aria-pressed="false">
+        <span class="mini mini-strip"></span>Sunset strip
+      </button>
+    </div>
+
+    <h2>3 · Caption</h2>
+    <div class="field">
+      <label for="headlineInput">Headline</label>
+      <input id="headlineInput" type="text" value="SUNSET HEIST" maxlength="40" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="sublineInput">Subline</label>
+      <input id="sublineInput" type="text" value="VICE COVER STUDIO" maxlength="48" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="sizeRange">Headline size</label>
+      <input id="sizeRange" type="range" min="0.6" max="1.6" step="0.05" value="1">
+    </div>
+    <div class="field">
+      <label>Headline colour</label>
+      <div class="swatches" id="colourSwatches">
+        <button type="button" data-colour="#ffffff" class="swatch active" style="background:#ffffff" aria-label="White"></button>
+        <button type="button" data-colour="#ffd60a" class="swatch" style="background:#ffd60a" aria-label="Yellow"></button>
+        <button type="button" data-colour="#ff2e88" class="swatch" style="background:#ff2e88" aria-label="Pink"></button>
+        <button type="button" data-colour="#39d5ff" class="swatch" style="background:#39d5ff" aria-label="Cyan"></button>
+      </div>
+    </div>
+    <label class="check"><input id="outlineCheck" type="checkbox" checked> Bold black outline on the headline</label>
+
+    <h2>4 · Colour grade</h2>
+    <div class="choices" id="gradeChoices">
+      <button type="button" data-grade="sunset" class="choice active" aria-pressed="true">Sunset</button>
+      <button type="button" data-grade="neon" class="choice" aria-pressed="false">Neon night</button>
+      <button type="button" data-grade="dusk" class="choice" aria-pressed="false">Palm dusk</button>
+      <button type="button" data-grade="clean" class="choice" aria-pressed="false">Clean</button>
+    </div>
+
+    <h2>5 · Export</h2>
+    <div class="choices" id="sizeChoices">
+      <button type="button" data-size="1080x1080" class="choice" aria-pressed="false">1080 × 1080</button>
+      <button type="button" data-size="1080x1350" class="choice" aria-pressed="false">1080 × 1350</button>
+      <button type="button" data-size="1920x1080" class="choice active" aria-pressed="true">1920 × 1080</button>
+    </div>
+    <button id="exportButton" type="button" class="export">Export PNG</button>
+    <p class="hint" id="exportNote">Exports the cover at the size above, as a PNG download.</p>
+  </section>
+
+  <section class="panel stage" aria-label="Live preview">
+    <h2>Live preview <span class="stage-note">click a panel to select it · drag to move its photo</span></h2>
+    <div class="canvas-wrap">
+      <canvas id="preview" width="960" height="540"></canvas>
+    </div>
+    <p class="hint">Your photos never leave this machine — they are read from your files and drawn on this canvas only.</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>Vice Cover Studio — an original cover maker. No game logos, artwork or fonts are used here; the display fonts are Bebas Neue and Anton, both under the SIL Open Font License (see app/fonts/).</p>
+</footer>
+
+<script type="module" src="src/app.js"></script>
+</body>
+</html>
